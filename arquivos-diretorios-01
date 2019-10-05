@@ -1,0 +1,106 @@
+* Verificar diretórios existentes no diretório atual:
+- pwd
+
+* Listar todos arquivos e diretórios de um dado terminal
+- ls 
+
+* Exibe mensagem no terminal
+- echo Minhas Mensagem 
+
+- echo Hello World! > HeWord.txt (Cria um arquivo com a mensagem informada)
+- echo Manolo! >> HeWord.txt (Adiciona uma mensagem contatenando com o valor prévio no arquivo, do contrário p arquivo será sobrescrito.)
+
+* Imprime o conteúdo de um arquivo no terminal:
+- cat HeWord.txt
+
+* Limpa o terminal
+- clear
+- Ctrl + L possui a mesma função. 
+
+* Exibe as informações de cada arquivo (permissão, data criação, nome, etc) dentro do diretório, desconsiderando pastas
+- ls -l
+
+* Exibe todos os arquivos, inclusive ocultos e diretórios
+- ls -la // 'a' é referente a all. Os arquivos que estiverem setados como ocultos, aparecerão com um '.' ponto na frente do nome
+
+* Exibe o nome so usuário logado no sistema:
+- whoami
+
+* Comando que auxilia o usuário, exibindo um manial contendo variações a partir de um dado comando passado por parâmetro
+- man pwd
+- man ls
+
+* Criando diretório:
+- mkdir novo-diretorio (mk de make dir de directory)
+
+* Apagando diretórios:
+- rm arquivo-teste.txt
+- rmdir diretorio-teste
+
+* Caracteres coringa:
+
+Caracteres Coringas: 
+Caso tenha arquivos com nomes parecidos, é possível utilizar alguns caracteres coringas na seleção dos arquivos, por exemplo:
+
+Supondo que o diretório tenha:
+
+arquivo1.txt
+arquivo2.txt
+arquivo3.txt
+arquivo4.txt
+
+Podemos exibir todos arquivos, selecionados por:
+
+cat arquivo?.txt // Exibe o conteúdo de todos arquivos que tenham nome arquivo e um caractere antes da extensão
+cat arquivo*.txt // Exibe todos arquivos, do tipo .txt que iniciem com "arquivo"
+
+PS: Caso exista algum arquivo chamda arquivo*.txt, o mesmo deverá ser referenciado com "arquivo*.txt", para ser interpretado literalmente da mesma forma.  
+Copiando arquivos e diretórios, ex:
+
+cp teste1.txt bem-vindo.txt // O conteudo de teste1 será copiado para bem-vindo.txt, que será criado caso não exista.
+
+Alterando o nome de um arquivo:
+
+mv teste-123.txt renomeado-123.txt // mv se refere a mudança, alterar o nome é um tipo de mudança. 
+
+O mv também é utilizado para mover os arquivos de lugar, segue o exemplo:
+
+- mv bem-vindo.txt projetos-java/ 
+- mv bem-vindo.txt projetos-java/bem-vindo-renomeado.txt // Exemplo que ao mesmo tempo que move, renomeia o arquivo.
+
+* Exibindo conteúdo de dentro dos subdiretórios do diretório atual:
+- ls * 
+
+Zipando arquivos:
+
+zip teste-zip.zip teste-zip // Nome a ser dado para o arquivo, e nome do diretório a ser zipado. 
+unzip -q teste-zip.zip // O comando -q é para que não seja listado nenhum arquivo. 
+
+-wmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwm-
+zip bemvindo.zip *.txt
+Para criar um arquivo no formato .zip utilizamos o commando zip passando o nome do arquivo que desejamos criar e os arquivos que desejamos incluir. 
+No nosso caso todos que possuem extensão .txt.
+
+Para compactar todos os arquivos e diretórios utilizamos o comando zip, e passamos o parâmetro -r para indicar que queremos compactar de forma recursiva, incluindo diretórios e subdiretórios:
+
+$ zip -r work.zip workspace/
+Vamos remover o diretório workspace utilizando o rm -r e para descompactar, utilizamos o comando unzip. Podemos utilizar o ls e verificar que o diretório workspace foi descompactado.
+
+$ rm -r workspace/
+$ unzip work.zip
+$ ls workspace/
+bemvindo2.txt  bemvindo.txt  projetos-c#  projetos-java  projetos-php
+
+--------------------------------------------------------------------------
+
+unzip -l work.zip
+
+Para listar os arquivos dentro do arquivo .zip utilizamos o comando unzip passando o parâmetro -l
+
+-wmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwm-
+
+
+Dicas:
+
+- Quando é pressionado a tecla tab, será realizado um autocomplete se o terminal identificar o restante.
+- Todo comando que venhamos realizar que envolva diretórios, é necessário passar o '-r', que informa que o comando é recursivo (necessário para executar em subdiretórios)
