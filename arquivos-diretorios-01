@@ -1,4 +1,4 @@
-* Verificar diretórios existentes no diretório atual:
+* Imprime o diretório atual: 
 - pwd
 
 * Listar todos arquivos e diretórios de um dado terminal
@@ -133,6 +133,13 @@ $ tar -cjf work.tar.bz2 workspace/
 ---------------------
 
 - touch nomeArqui.extensao // Informa qual a data de alteração do arquivo alvo. 
+---------------------------------------------------------------------------
+
+Leitura de arquivos com (less, head, tail)
+
+- head -n 10 nomeArquivo.txt // Abre o arquivo e imprime as 10 primeiras linhas. A quantidade de linhas é definida por parâmetro
+- tail -n 10 nomeArquivo.txt // Iqual ao head, porém retornar as linhas do final para o inicio do arquivo
+- less nomeArquivo.txt // Abre o arquivo de forma que o mesmo pode ser pecorrido pelas setas do telaclado (tipo scroll)
 
 Dicas:
 
