@@ -99,6 +99,40 @@ Para listar os arquivos dentro do arquivo .zip utilizamos o comando unzip passan
 
 -wmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwmwm-
 
+No linux, a forma mais utilizada pra empacotar é o tar ex: (Atenção o tar apenas empacota, é necessário passar qual algoritmo de compactação será utilizado, ex: zip, bx2 está certo?)
+
+- tar -cz nomeDiretorio > nomeArquivo.tar.gz // tar é a função, c - create, z - zip
+- tar -czf nomeArquivo.tar.gz /diretorioASerZipado // f - passamos o nome do arquivo zipado e depois o diretório. 
+- tar -vczf nomeArquivo.tar.gz /diretorioASerZipado // v - verbose. Imprime informações sobre a operação
+Extrair arquivo zipado pelo tar:
+
+- tar -xz < nomeArquivo.tar.gz // x - extract, z - zip, < - abir 
+- tar -xzf < nomeArquivo.tar.gz // Com o f podemos passar apenas o nome do arquivo, sem necessidade do sinal '<'
+- tar -vxzf < nomeArquivo.tar.gz // v - verbose. Imprime informações sobre a operação
+
+Passando o -v (verbose) e passando o -q (quiet). Sendo que um imprime iformações do procedimento e o outro oculta. 
+
+---------------------
+O parâmetro -c indica ao comando tar que desejamos criar um novo arquivo.
+
+O comando tar apenas empacota vários arquivos em um único arquivo, sem realizar compactação, e por isso passamos o parâmetro -z para indicar que queremos, além de criar um único arquivo, realizar um processo de compactação utilizando o formato .gz. Quando compactamos podemos reduzir o tamanho.
+
+O parâmetro -f indica que compactaremos para um arquivo.
+
+* bz2:
+
+Vimos que o comando tar não compacta, apenas empacota os arquivos. E que podemos utilizá-lo em conjunto com outros compactadores. Vimos como compactar no formato .gz, que é o formato gerado pelo compactador gzip.
+
+Um outro formato de compactação que podemos utilizar junto com o tar é o formato .bzip2. Esse formato é mais eficiente na compactação, conseguindo criar arquivos menores. Porém o tempo que o .bzip2 leva para criar o arquivo compactado é maior do que o tempo do gzip.
+
+Para criar um arquivo .tar compactado com o bzip2, substituímos o -z (de gzip) por um -j. O formato que utilizamos é o .tar.bz2.
+
+$ tar -cjf work.tar.bz2 workspace/
+
+
+---------------------
+
+- touch nomeArqui.extensao // Informa qual a data de alteração do arquivo alvo. 
 
 Dicas:
 
