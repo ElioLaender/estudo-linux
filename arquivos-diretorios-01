@@ -1,4 +1,4 @@
-* Verificar diretórios existentes no diretório atual:
+* Imprime o diretório atual: 
 - pwd
 
 * Listar todos arquivos e diretórios de um dado terminal
