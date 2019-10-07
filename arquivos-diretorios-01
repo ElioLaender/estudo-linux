@@ -101,7 +101,7 @@ Para listar os arquivos dentro do arquivo .zip utilizamos o comando unzip passan
 
 ---------------------------------------------------------------------------
 
-cat (less, head, tail)
+Leitura de arquivos com (less, head, tail)
 
 - head -n 10 nomeArquivo.txt // Abre o arquivo e imprime as 10 primeiras linhas. A quantidade de linhas é definida por parâmetro
 - tail -n 10 nomeArquivo.txt // Iqual ao head, porém retornar as linhas do final para o inicio do arquivo
