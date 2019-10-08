@@ -130,8 +130,7 @@ Para criar um arquivo .tar compactado com o bzip2, substituímos o -z (de gzip) 
 $ tar -cjf work.tar.bz2 workspace/
 
 
----------------------
-
+----------------------------------------------------------------------------
 - touch nomeArqui.extensao // Informa qual a data de alteração do arquivo alvo. 
 ---------------------------------------------------------------------------
 
