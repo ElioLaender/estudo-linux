@@ -1,0 +1,60 @@
+jobs: Lista os processos que estão ativos ou pausados no bash alvo
+- jobs // Quando executamos o jobs e aparece o nome do serviço na forma 'nome-servico &' o '&', representa que esse serviço está sendo executado em background
+
+* bg (Executando processos em background): Quando executamos um programa através do background, ele "segura" o terminal com essa execução, geralmente exibindo logs. 
+É possível realizar a chamada de um programa e liberar o terminal para outros comandos através da instruçao bg:
+
+Ctrl + z // Para temporareamente o serviço que está rodando no bash alvo
+
+- jobs // para visualizar os serviços, irá retornar a posição
+- bg posicao 
+
+- fg posicao // Voltar serviço para ser executado monitorado pelo terminal (forground)
+
+* Exibe os processos através de uma arvore de execução: 
+- pstree
+----------------------------------------------------------------
+
+Abrir programa diretamente em background:
+
+- nomePrograma & // O '&', já informa a intenção de executar o programa em background
+
+----------------------------------------------------------------
+
+pstree:
+
+No Linux, um processo pode criar outros processos, mantendo assim uma hierarquia, onde cada processo pode dar origem a novos processos. 
+Qual comando podemos utilizar para conseguir visualizar essa árvore de processos?
+
+- pstree
+
+O comando que nos mostra a árvore de processos é o pstree. 
+Esse comando nos mostra um diagrama no qual é possível identificar quem originou (processo pai) cada um dos processos (processo filho).
+----------------------------------------------------------------
+
+bg:
+
+Quando iniciamos um aplicativo através do seu comando, o terminal fica bloqueado, impedindo sua utilização. 
+O que deve ser feito para liberar o terminal e fazer com que o programa passe a ser executado em background?
+
+- Pressionar Ctrl + z e executar o comando $ bg
+
+Se utilizarmos o comando Ctrl + z conseguimos que o terminal fique livre para o uso, porém paramos o programa e não conseguiremos utilizá-lo. 
+Pra que o programa volte a ser excutado em background utilizamos o comando bg.
+-----------------------------------------------------------------
+
+jobs:
+
+Vimos que é possível iniciar mais de um processo em um mesmo terminal, fazendo combinações entre trazer um determinado processo para o foreground, pausá-lo, e deixá-lo executando em background. 
+Qual comando podemos utilizar para ver os processos que estão pausados ou sendo executados em segundo plano no bash em que estamos?
+
+- jobs
+
+Para saber quais processos estão sendo executados em background e quais processos estão parados no nosso terminal, utilizamos o comando jobs.
+
+------------------------------------------------------------------
+
+Ps: Quando um processo está em foreground e precionamos Ctrl + c, o processo é encerrado automaticamente.  
+
+
+

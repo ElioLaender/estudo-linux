@@ -1,0 +1,55 @@
+O linux tem um comando para que possamos visualizar o quanto de hardware um determinado os processos estão consumindo:
+- top 
+
+----------------------------------------------------------
+Existe a possibilidade de encerrar mais de um processo em um mesmo comando, utilizando o killall. Esse comando, mata todos os processos que compartilham o mesmo nome
+
+- kill -9 pid1 pid2 pid3 // Existe uma forma mais prática de realizar esse procedimento
+
+- killall -9 chrome // Mata todos os processos que possuem chrome na descriação. 
+
+----------------------------------------------------------
+
+top: (opinião do instrutor)
+
+O comando top serve para listar os processos do Linux. A diferença entre o top e o ps é que o top atualiza as informações de tempos em tempos.
+
+No seu cabeçalho, o top mostra algumas informações sobre o sistema, como a quantidade de memória disponível e em uso, informações sobre o uso do processador, etc.
+
+Na lista dos processos também temos informações sobre a utilização do processador e da memória. Os processos são ordenados, por padrão, pelo uso do processador.
+
+----------------------------------------------------------
+
+Imagine que estamos executando o comando top ao mesmo tempo em mais de uma aba do terminal. 
+Como fazer para matar todos os processos criados devido às execuções do comando top, utilizando o nome do comando no lugar do PID
+
+$ killall -9 top
+
+O killall é o comando que podemos utilizar para encerrar um processo passando o nome do processo ao invés do PID. Caso vários processos tenham sido criados para um mesmo programa, o killall irá encerrar todos esses processos.
+
+Podemos passar o -9 para o killall para garantir que o processo será encerrado, da mesma forma que fazemos com o kill:
+
+-----------------------------------------------------------
+
+Mais informações sobre o comando top:
+
+O top possui algumas opções que podemos utilizar para alterar a forma padrão de como as informações são mostradas.
+
+Para mostrar apenas os processos de um determinado usuário, podemos utilizar a opção -u:
+
+top -u lucas
+Para acompanhar as informações de um processo específico, podemos utilizar a opção -p passando como argumento o PID do processo:
+
+$ ps -e | grep firefox
+19509 ?        00:00:03 firefox
+$ top -p 19509
+Por padrão, o top atualiza a tela com novas informações sobre os processos a cada 3 segundos. Para alterar esse tempo basta pressionar d enquanto estiver rodando o top, inserir o valor desejado e pressionar a tecla Enter:
+
+Change delay from 3,0 to 1
+O top possui muitas opções. Lembre-se que você pode obter informações sobre um comando consultando a sua documentação:
+
+man top
+
+
+
+

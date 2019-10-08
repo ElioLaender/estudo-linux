@@ -1,0 +1,46 @@
+* Verificar os processos que estão sendo executados pelo terminal:
+- ps 
+
+* Verifica todos os processos realizados pelo sistema operacional:
+- ps -e 
+
+* Exibe os processos com mais informações, tais como o horário que começou a execução.
+- ps -ef
+
+* Quando um processo é listado, ele possui um id, através desse id conseguimos parar o processo com o comando
+- kill idDoProcesso
+
+* Finaliza o processo de forma definitiva, sem dar "chance" para o programa retornar nenhuma mensagem
+- kill -9 idDoProcesso
+
+------------------------------------------------------------------------------------------------------------
+
+Utilizando o comando grep: 
+
+Com o grep, conseguimos marcar os resultados determinada string para facilitar a leitura, exemplo:
+- ps -e | grep chrome // Nesse caso também será realizado filtro para retornar apenas os logs que contenham chrome na descrição
+
+Exibe apenas trachos de um texto que contém a string especificada:
+
+- cat google.txt | grep "Larry Page and Sergey Brin"
+
+-------------------------------------------------------------------------------------------------------------
+
+Sobre a finalização do processo com Kill (Opinião do Instrutor)
+
+Utilizamos o comando kill para enviar um sinal para um processo. Os processos utilizam sinais para se comunicar entre si. Sinais também são utilizados pelo Linux para interferir no funcionamento dos processos.
+
+Exemplos de sinais são o STOP e o CONT, que podem ser utilizados, respectivamente, para interromper a execução de um processo e retornar à execução do processo que foi interrompido anteriormente.
+
+Para utilizar o comando kill, passamos o sinal que desejamos enviar ao processo seguido do identificador único do processo, o pid. Imagine que temos um processo com pid = 11163 no nosso sistema:
+
+$ kill -STOP 11163
+$ kill -CONT 11163
+Para encerrar um processo de forma que ele possa realizar algumas tarefas antes de ser encerrado, utilizamos o sinal TERM. Quando não indicamos nenhum sinal para o comando kill, é o sinal TERM que é executado por padrão. Portanto, o comando que podemos utilizar para encerrar o processo de uma maneira mais educada é:
+
+$ kill 11269
+Em alguns momentos mais críticos precisamos encerrar um processo à força. Precisamos "matar" o processo. Nesse caso utilizamos o sinal KILL, que é também representado com o número -9. Então para garantir que o programa será encerrado imediatamente, fazemos:
+
+$ kill -9 11364
+
+
