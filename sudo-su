@@ -1,0 +1,78 @@
+which:
+
+Já vimos como executar um script que estava no nosso diretório atual. E sabemos que quando executamos determinados comandos, 
+apesar de apenas digitarmos o nome do arquivo, eles não se encontram no nosso diretório atual. 
+Como saber, por exemplo, o caminho onde se encontra o arquivo do comando zip?
+
+$ which zip
+
+Para descobrir o caminho onde se encontra o arquivo de um comando, utilizamos o comando which:
+
+$ which zip
+/usr/bin/zip
+
+----------------------------------------------------------------------------------------------------
+
+Tipos de usuário:
+
+Se tentarmos mover o arquivo realizabackup para o diretório /usr/bin usando o comando $ mv realizabackup /usr/bin, não iremos conseguir. 
+Por que isso ocorre e como podemos resolver?
+
+Não conseguimos mover o arquivo pois o dono do diretório é o único que possui permissão de escrita na pasta, e o dono nesse caso é o usuário root. 
+Outros usuários, como o que estamos utilizando no momento, não possuem permissão de escrita, e por isso o comando para mover o arquivo não funciona.
+
+$ ls -l /usr/
+total 108
+drwxr-xr-x   2 root root 45056 Jan 26 09:19 bin
+
+O usuário root é o que costumamos chamar de superusuário - um usuário que é utilizado para realizar tarefas relacionadas à administração do sistema. 
+Esse usuário não possui qualquer restrição. Para obter o acesso de administrador no nosso sistema, utilizamos o comando sudo. 
+A senha que será solicitada é a do nosso usuário, pois ele faz parte do mesmo grupo ao qual pertence o usuário root.
+
+É dessa forma que vamos conseguir mover o arquivo realizabackup para a pasta /usr/bin. Após mover o arquivo, conseguimos executar o script a partir de qualquer diretório:
+
+$ sudo mv realizabackup /usr/bin/
+[sudo] password for lucas:
+$ ls /usr/bin/ | grep realizabackup
+realizabackup
+$ realizabackup
+Backup realizado com sucesso    
+
+-------------------------------------------------------------------------------------------------------
+
+passwd:
+
+Como podemos fazer para alterar a senha do usuário root? Aproveite para alterar a senha do usuário root do seu sistema.
+
+$ sudo passwd
+
+Para alterar a senha do usuário atual, utilizamos o comando passwd. Para alterar a senha do usuário root, utilizamos $ sudo passwd. 
+Como não havia sido definido uma senha antes, a senha será criada. Caso já exista uma senha, a senha atual será solicitada, 
+e depois conseguiremos digitar a nova senha. Considere que não há senha definida para o root.
+
+$ sudo passwd
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+
+------------------------------------------------------------------------------------------------------
+
+Como podemos nos logar com um outro usuário, cujo nome é nico, dentro da nossa sessão no terminal? Aproveite e faça um teste logando-se como usuário root.
+
+$ su nico
+
+Para conseguir se logar com outro usuário dentro de uma sessão do terminal, utilizamos o comando su:
+
+$ su nico
+
+O su por padrão, caso não seja passado o nome de um usuário, irá logar-se como o usuário root, então os comandos abaixo são equivalentes:
+
+$ su root
+Password:
+$ su
+Password:
+
+Mas lembre-se que é preciso ter cuidado, e não é uma boa prática fazer tudo como usuário root. 
+Quando realizar tarefas que necessitam de poderes de administrador, podemos sempre utilizar o comando sudo.
+
+---------------------------------------------------------------------------------------------------------

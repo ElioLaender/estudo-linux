@@ -1,0 +1,80 @@
+Variáveis de ambiente:
+
+Execute o comando env no seu sistema.
+
+A saída lista todas as variáveis de ambiente que o seu sistema possui.
+
+As variáveis de ambiente são variáveis globais que podemos utilizar para definir configurações, personalizar nosso terminal.
+
+Quando executamos o comando env, podemos ver quais são as variáveis que estão definidas. A variável HOME, por exemplo, guarda o caminho para o diretório do usuário.
+
+A variável PATH, guarda informações de onde estão nossos arquivos executáveis para que possamos executar um comando sem a necessidade de digitar o caminho absoluto.
+
+--------------------------------------------------------------------------------------------------------------
+
+O comando wc pode ser utilizado para contar o número de palavras, caracteres e linhas que um arquivo possui. Junto com o wc podemos utilizar a opção -w para indicar que desejamos contar apenas o número de palavras que existem no arquivo. O *.txt indica que desejamos realizar a contagem em todos os arquivos .txt do nosso diretório atual.
+
+$ wc -w *.txt
+ 6 projetos_java.txt
+10 projetos_php.txt
+16 total
+O wc nos informou que o arquivo projetos_java.txt possui 6 palavras, o arquivo projetos_php.txt possui 10 palavras, e por fim, o total de palavras nos dois arquivos é 16.
+
+Dentro do diretório scripts, crie um script chamado contapalavras que conta a quantidade de palavras nos arquivos .txt presentes no diretório atual.
+
+O script deverá imprimir apenas a última linha que o comando wc retorna, representando o total de palavras dos arquivos .txt que existem no nosso diretório atual. Esse filtro pode ser feito através do comando grep.
+
+O arquivo contapalavras irá possuir o seguinte conteúdo:
+
+wc -w *.txt | grep total
+Lembre-se de adicionar permissão de execução para o script.
+
+Adicione o diretório scripts na variável de ambiente PATH, pois é nessa variável que ficam os caminhos dos programas a serem executados. Modifique o que for necessário para que quando um novo terminal for aberto essas configurações não se percam.
+
+Adicione alguns arquivos .txt no diretório scripts, abra um novo terminal e tente executar o script contapalavras, para verificar se tudo funcionou.
+
+Observação: Para que o wc mostre a linha com o total é necessário que exista mais de um arquivo .txt no diretório em que executamos o contapalavras.
+
+Vamos assumir que scripts é nosso diretório atual. Primeiro criaremos o script contapalavras e adicionaremos permissão de execução:
+
+$ gedit contapalavras &
+[1] 6295
+$ chmod +x contapalavras
+Para adicionar o diretório scripts nas variáveis de ambiente do usuário, podemos editar o arquivo oculto .bashrc dentro do diretório do usuário.
+
+$ cd
+$ gedit .bashrc &
+Vamos adicionar o conteúdo após a última linha, no fim do arquivo:
+
+PATH=$PATH:/home/lucas/scripts
+Indicamos que a variável de ambiente PATH recebe o conteúdo já presente nela, mais o diretório scripts. Ao abrir um novo terminal, já conseguimos acessar o script contapalavras:
+
+$ contapalavras
+16 total
+
+-----------------------------------------------------------------------------------------------------------------
+
+Obtendo o número de processos:
+
+Além de contar o número de palavras em um arquivo, o comando wc pode também contar o número de caracteres e linhas em um arquivo, ou em uma saída do terminal. Para isso, podemos utilizar a opção -c para caracteres e -l para linhas.
+
+Se utilizarmos o comando ps -e, que lista todos os processos, podemos passar o retorno do ps para o wc -l contar quantas linhas o retorno possui. A quantidade de linhas representa a quantidade de processos existentes no nosso sistema.
+
+Dentro do diretório scripts, crie um script chamado totaldeprocessos, com o seguinte conteúdo:
+
+ps -e | wc -l
+Lembre-se de adicionar permissão de execução no script.
+
+Tente executar o script alterando o seu diretório para um diferente de scripts, para testar se tudo funcionou bem.
+
+Vamos criar o arquivo, adicionar o comando e adicionar permissão de execução:
+
+$ gedit totaldeprocessos &
+[1] 6523
+$ chmod +x totaldeprocessos
+Agora podemos testar. O número retornado é o número de processos que o nosso sistema possui no momento:
+
+$ cd
+$ totaldeprocessos
+240
+Perceba que agora sempre que colocarmos um script no diretório scripts, ele poderá ser executado independentemente do diretório em que estejamos, pois scripts agora é um dos diretórios nos quais o comando será procurado pelo nosso bash.

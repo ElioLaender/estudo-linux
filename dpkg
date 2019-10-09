@@ -1,0 +1,42 @@
+Existem arquivos .deb referente a executáveis do Debian. Para instalar pacotes deste tipo, podemos utilizar a instrução dpkd, ex:
+
+* Instalando pacote debian
+sudo dpkg -i nomeDoPacote.deb // O -i representa install
+
+* Desinstalando pacote Debian
+sudo dpkg -r nomePacote // O -r é referente ao remove. No caso de desinstalar, devemos passar apenas o nome do pacote, sem a extensão utilizada na instalação. 
+
+----------------------------------------------------------
+
+Diferença entre o tar.gz e zip. 
+
+A vantagem do tar.gz é a de manter as permissões de acesso da pasta de origem do arquivo compactado. 
+
+-----------------------------------------------------------
+
+Instalando a partir do código fonte:
+
+Após baixar o pacote .tar.gz, vamos acessar a pasta em que se encontra o arquivo e descompactá-lo.
+
+Em seguida, vamos acessar a pasta criada após a descompactação.
+
+$ tar zxf git-2.7.1.tar.gz
+
+$ ls
+git-2.7.1  git-2.7.1.tar.gz
+
+$ cd git-2.7.1/
+Lembre-se que o formato .tar não compacta, apenas empacota. Esse formato é utilizado pois mantém as permissões que os arquivos possuíam antes do empacotamento. Após empacotar com o .tar podemos compactar utilizando outra ferramenta.
+
+Primeiro vamos executar o script configure, para verificar se está faltando algo para que o git possa funcionar corretamente.
+
+$ ./configure
+Vamos executar o comando make para realizar o build do nosso projeto. Mas nesse momento receberemos um erro, pois precisamos instalar uma dependência antes. Após instalar a dependência, podemos rodar o make.
+
+Por fim, para instalar o git, executamos um make install. Para instalar, é necessário permissões de administrador:
+
+$ sudo apt-get install zlib1g-dev
+$ make
+$ sudo make install
+
+--------------------------------------------------------------
