@@ -1,0 +1,23 @@
+Utilização do shell script:
+
+Você foi chamado para uma entrevista de emprego e durante a entrevista, um dos desenvolvedores que está te entrevistando diz que o shell script é amplamente utilizado para automação de tarefas. 
+Com base na aula que você assistiu, qual é a sua opinião?
+
+Você concorda com a afirmação, os scripts são muito utilizados quando temos tarefas corriqueiras que serão realizadas mais de uma vez, 
+propiciando assim uma automatização de tais tarefas.
+
+Os scripts são muito utilizados quando temos uma tarefa que precisa ser executada várias vezes, ao invés de digitarmos os comandos a cada vez,
+podemos consolidar em um script e executarmos esse script somente, proporcionando assim uma automatização de tarefas.
+
+-------------------------------
+
+bash:
+
+Em um script que você encontrou na internet possui a primeira linha com o código #!/bin/bash. O que essa primeira linha indica?
+
+Essa primeira linha do script tem como finalidade indicar qual será o interpretador dos comandos presentes no script. 
+Nesse caso, será utilizado o bash como sendo o interpretador
+
+--------------------------------
+
+
