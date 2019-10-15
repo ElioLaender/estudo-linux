@@ -1,0 +1,87 @@
+﻿Função utilizada para processamento de texto:
+
+------------------
+
+awk -F. '{ print $1 }' # $1 -> Parâmetro passado na hora de chamar o script
+
+A opção -F é usado quando queremos especificar um campo delimitador do parâmetro de texto passado. Nesse nosso exemplo, 
+estamos "cortando" o parâmetro de texto passado onde tivermos o '.'
+
+
+------------------
+
+echo imagem_livro | awk -F_ '{ print $1 }'
+
+Veja que o comando awk está colocando como sendo o ponto delimitador o símbolo _ (imagem'_'livro), 
+dessa forma, teremos dois campos, o primeiro sendo imagem e o segundo sendo livro. Quando dizemos para o awk print $1, 
+estamos referenciando ao primeiro campo que será o campo com o nome imagem.
+
+------------------
+
+$imagem | awk -F. '{ print $1 }' por $()
+
+O que nós queremos é guardar o resultado da execução do comando ls $imagem | awk -F. '{ print $1 }' na variável imagem_sem_extensao. 
+Para isso, nós devemos envolver esse comando por $() informando assim que esse comando será executado em um subshell e posteriormente teremos nesse campo o resultado da execução desse comando.
+
+$(ls $imagem | awk -F. '{ print $1 }') # $() -> Envolve o conteúdo a ser executado em um subshell, será aguardado o retorno para dar continuidade.
+
+------------------
+
+for imagem in *.jpg
+do
+    imagem_sem_extensao=$(ls $imagem | awk -F. '{ print $1 }')
+    convert $imagem_sem_extensao.jpg png/$imagem_sem_extensao.png
+done
+
+# Obs: Não podemos ter espaço entre o nome da variável, o símbolo do = e o conteúdo da variável
+
+////////////////////////////////////////////
+
+convert-image-jpg-png.sh
+
+#!/bin/bash
+
+converte_imagem(){
+    cd ~/Downloads/imagens-livros # Acessa o diretório
+    # Verifica se existe o diretório png, caso contrário cria o diretório Ps: O if no Shell é encerrado com 'fi'
+    if [ ! -d png ] 
+    then
+        mkdir png
+    fi
+
+    for imagem in *.jpg
+    do
+        local imagem_sem_extensao=$(ls $imagem | awk -F. '{ print $1 }') # Não pode existir espaço no '=' da atribuição | o 'local' seta a variável com scopo de bloco.  
+        convert $imagem_sem_extensao.jpg png/$imagem_sem_extensao.png
+    done
+}
+
+# No Shell, uma função só pode ser invocada após sua declaração. (Não possui hoisting como no JS)
+converte_imagem
+# Verifica se o status de retorno da função foi um sucesso
+if [ $? -eq 0]
+then
+    echo "Conversão realizada com sucesso"
+else 
+    echo "Houve uma falha no processo"
+fi
+
+# Quando executamos um comando no Linux, ele emite um status de saída. Essa regra também é válida para chamada de método.
+# Quando o comando é executado com sucesso, o status de saída é zero (0). 
+# Já quando ocorre falhas, esse status de saída pode variar de 1 a 255. 
+
+# -------------------------------------------------------------------------------------
+
+Símbolo $:
+
+
+if [ $? -eq 0 ] # '$?' captura o status de retorno do comando anterior | '-eq' Verifica se é igual 
+
+O trecho do código está analisando o status de saída do comando anterior, 
+se for 0 é porque o comando anterior foi executado com sucesso.
+
+
+
+
+
+

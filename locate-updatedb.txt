@@ -1,0 +1,24 @@
+locate: Comando utilizado para exibir em qual diretório está os binários de determinada aplicação, ex:
+
+- locate firefox // Exibe a pasta onde está os binários.
+
+O linux possui um banco de dados interno para armazenar a locazação dos arquivos, estes já ficam salvos no banco e são atualizados de tempos em tempos, para que não seja gasto processamento com realização de buscas. 
+
+Caso queira informações mais atualizadas, é necessário executar um comando para atualizar esse banco de dados interno. 
+
+- sudo updatebd //atualiza todas as informações armazenadas no banco de dados interno do sistema operacioal. É necessário execuar o comando como superusuário, por envolver todo SO. 
+Esse database é global para o sistema operacional. 
+
+----------------------------------------------------------------------------
+
+O comando locate pode nos apresentar dados desatualizados na busca, pois sua base de pesquisa é atualizada apenas de tempos em tempos. Como podemos fazer para atualizar essa base de dados no momento que desejarmos?
+
+$ sudo updatedb
+
+Para atualizar a base de dados que o locate utiliza para realizar as pesquisas, executamos o comando updatedb. Precisamos executar o comando updatedb utilizando um usuário que tenha permissões para realizar modificações no arquivo. Por isso utilizamos o comando sudo para indicar que desejamos executar como usuário root. A senha solicitada será a do seu usuário:
+
+Ex:
+$ sudo updatedb
+[sudo] password for lucas:
+
+----------------------------------------------------------------------------

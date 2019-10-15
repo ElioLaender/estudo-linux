@@ -1,0 +1,37 @@
+sh: Programas escritos em Shell que são executados a partir da chamada:
+
+- sh nomeDoArquivo // Executa as instruções shell contidas no arquivo
+
+* Quando precisamos referenciar um dado path, podemos substituir o nome do usuário por '~' til. Ex:
+/home/elio-jose/minha-pasta -> /home/~/minha pasta
+
+-----------------------------------------------------------------------------------
+
+Permissões de arquivos:
+
+ ls -l realizabackup
+-rw-rw-r-- 1 lucas lucas 52 Jan 25 17:36 realizabackup
+
+As informações sobre as permissões são listadas nos primeiros caracteres da saída do ls -l. O primeiro caractere, no nosso caso um -, indica que se trata de um arquivo. Caso fosse um diretório seria exibida a letra d.
+
+No restante dos caracteres, quando encontramos um - significa que não temos uma determinada permissão. O primeiro conjunto de três caracteres representa as permissões do dono do arquivo, o segundo, as permissões do grupo e o terceiro, as permissões dos outros usuários.
+
+No nosso script, o dono e o grupo têm permissão para leitura(r) e escrita(w), mas não para execução. Já os outros usuários têm apenas permissão de leitura.
+
+----------------------------------------------------------------------------------
+
+Modificando as permissões de um arquivo:
+
+Para alterar a permissão de um arquivo, utilizamos o comando chmod. No nosso caso, desejamos adicionar a permissão de execução ao arquivo:
+$ chmod +x realizabackup
+$ ls -l realizabackup
+-rwx-rwx-rx 1 lucas lucas 52 Jan 25 17:36 realizabackup
+
+Removendo a permissão do arquivo:
+$ chmod -w realizabackup
+$ ls -l realizabackup
+-r-xr-xr-x 1 lucas lucas 52 Jan 25 17:36 realizabackup
+
+Ps: Note que para adicionar a permissão, foi passado o tipo de opeção no chamod com um '+', e para remover
+foi utulizado um '-'. 
+---------------------------------------------------------------------------------
