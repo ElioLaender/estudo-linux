@@ -35,50 +35,20 @@ done
 
 # Obs: Não podemos ter espaço entre o nome da variável, o símbolo do = e o conteúdo da variável
 
-////////////////////////////////////////////
-
-convert-image-jpg-png.sh
-
-#!/bin/bash
-
-converte_imagem(){
-    cd ~/Downloads/imagens-livros # Acessa o diretório
-    # Verifica se existe o diretório png, caso contrário cria o diretório Ps: O if no Shell é encerrado com 'fi'
-    if [ ! -d png ] 
-    then
-        mkdir png
-    fi
-
-    for imagem in *.jpg
-    do
-        local imagem_sem_extensao=$(ls $imagem | awk -F. '{ print $1 }') # Não pode existir espaço no '=' da atribuição | o 'local' seta a variável com scopo de bloco.  
-        convert $imagem_sem_extensao.jpg png/$imagem_sem_extensao.png
-    done
-}
-
-# No Shell, uma função só pode ser invocada após sua declaração. (Não possui hoisting como no JS)
-converte_imagem
-# Verifica se o status de retorno da função foi um sucesso
-if [ $? -eq 0]
-then
-    echo "Conversão realizada com sucesso"
-else 
-    echo "Houve uma falha no processo"
-fi
-
-# Quando executamos um comando no Linux, ele emite um status de saída. Essa regra também é válida para chamada de método.
-# Quando o comando é executado com sucesso, o status de saída é zero (0). 
-# Já quando ocorre falhas, esse status de saída pode variar de 1 a 255. 
-
-# -------------------------------------------------------------------------------------
+------------------
 
 Símbolo $:
-
 
 if [ $? -eq 0 ] # '$?' captura o status de retorno do comando anterior | '-eq' Verifica se é igual 
 
 O trecho do código está analisando o status de saída do comando anterior, 
 se for 0 é porque o comando anterior foi executado com sucesso.
+
+------------------
+
+Variáveis em script shell possuem escopo global:
+
+* As variáveis são por padrão globais podendo assim ser acessadas em qualquer trecho do nosso script, mesmo que ela se encontre dentro de uma função. Dessa forma, ao colocar o comando echo $imagem fora do escopo da função, teremos a impressão do conteúdo da variável imagem que é minha_imagem.jpg
 
 
 
