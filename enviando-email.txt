@@ -1,0 +1,48 @@
+Para realizarmos o envio de email a partir do Shell, é necessário instalar o pacote ssmtp:
+
+- sudo apt-get install ssmtp
+
+Após instalado, precisamos abrir o arquivo de configuração para setar as informações do email responsável por fazer os envios autenticados. 
+
+sudo gedit /etc/ssmtp/ssmtp.conf
+
+Antes de configurar, podemos apagar todo o conteúdo do arquivo para realizarmos a configuração do zero. 
+
+================================================================================================================
+## ssmtp.conf
+
+root=servidor.mutillidae@gmail.com # Aqui deverá ser setado o email responsável pelos envios.
+mailhub=smtp.gmail.com:587 # Informar qual o smtp do fornecedor do email 
+AuthUser=servidor.mutillidae@gmail.com # email de autenticação
+AuthPass= # senha do email referido
+UseSTARTTLS=yes # Setado o uso de criptografia TLS
+
+================================================================================================================
+
+Para efetivamente enviar o email, vamos baixar o pacote mailutils:
+
+- sudo apt-get install mailutils
+
+Após baixado o pacote, podesmos utilizalo em nossos scripts .sh
+
+================================================================================================================
+
+Após os baixado e configurado o ssmtp e o mailutils, temos um script agendado que verifica o servidor, segue um exemplo deste script:
+
+if [ $resposta_http -ne 200 ]
+then
+mail -s "Problema no servidor" adm.mutillidae@gmail.com<<del
+Houve um problema no servidor e os usuarios pararam de ter acesso ao conteúdo web.
+del
+    systemctl restart apache2
+fi
+
+================================================================================================================
+
+
+
+
+
+
+
+

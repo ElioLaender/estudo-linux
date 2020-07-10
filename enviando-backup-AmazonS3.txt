@@ -1,0 +1,32 @@
+====== backup-amazon.sh ==========
+
+#!/bin/bash
+
+CAMINHO_BACKUP=/home/elio/backup/backup_mutillidae_amazon
+cd $CAMINHO_BACKUP
+data=$(date +%F)
+
+# Verifica se existe um diretório com a data do dia anterior criado.
+if [ ! -d $data]
+then
+	MKDIR $data
+fi
+
+# Subcomando para retornar as tabelas existentes no banco de dados, 
+# foi utilizado o comando -v para pegar a coluna retornada, desconsiderando o título
+tabelas=$(mysql -u root mutillidae -e "show tables;" | grep -v Tables) 
+for tabela in $tabelas
+do
+    mysqldump -u root mutillidae @tabela > $CAMINHO_BACKUP/$data/$tabela.sql
+done
+
+# Após a geração dos arquivos de backup, o script abaixo envia os arquivos para o S3 da Amazon
+
+aws s3 sync $CAMINHO_BACKUP s3://nome-do-bucket
+
+
+==================================
+Important:
+- Será necessário criar um diretório de backup para salvar o conteúdo gerado. 
+- Esse script deverá ser anexado ao crontab, para que o backup seja realizado automaticamente.
+ 

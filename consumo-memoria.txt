@@ -1,0 +1,60 @@
+Consumo de memória do sistema:
+
+Para verificar o consumo de memória do sistema, utiliamos o comando:
+- free
+
+Terá como retorno uma tabela com informações de consumo da 'Mem' e 'Swap'(espaço em disco previamente alocado para armazenar as informações menos utilizadas pelo processador quando a RAM atingir seu limite máximo)
+
+Para melhorar a visualização, podemos utilizar o pipe utilizando a função grep para filtrarmos apenas o conteúdo necessário. 
+
+free | grep -i mem # o '-i' é para desconsiderar o case sensitive dos parâmetros
+
+Para extrairmos apenas a informação necessária, vamos utilizar a seguinte instrução:
+
+free | grep -i mem | awk '{print $2}'
+
+
+PS: O awk é utilizado para extrair informações a partir de conteúdo de texto. 
+
+====================================================================================================
+# verificacao-memoria-consumida.sh 
+# Script para realziar verificações de consumo de memória do sistema que envia um email para o administrador
+# qundo o consumo ultrapassar os 50% 
+
+#!/bin/bash
+
+memoria_total=$(free | grep -i mem | awk '{ print $2 }') # extrai a memória total do comando
+memoria_consumida=$(free | grep -i mem | awk '{ print $3 }') # pega a memória consumida
+
+# O comando: awk -F. '{ print $1 }' é para truncar as casas decimais caso existam
+# O comando: bc <<< "scale=2 vou verificar. 
+
+relacao_memoria_atual_total=$(bc <<< "scale=2;$memoria_consumida/$memoria_total *100" | awk -F. '{ print $1 }')
+
+if [ $relacao_memoria_atual_total -gt 50 ]
+then
+  mail -s "Consumo de memoria acima do limite" adm.mutillidae@gmail.com<<del # 'del' delimitador
+O consumo de memoria esta acima do limite que foi especificado. Atualmente o consumo e de 
+$(free -h | grep -i mem | awk '{ print $3 }')
+
+====================================================================================================
+
+Rodando o script:
+
+bash verificacao_memoria_consumida.sh
+
+====================================================================================================
+
+Detalhe Swap:
+
+Trata-se de uma memória de "reserva emergencial" no caso da memória RAM estar lotada.
+
+O sistema precisa de memória para funcionar, dessa forma, quando a memória RAM estiver lotada, a memória Swap entraria como reserva
+
+====================================================================================================
+
+
+
+
+
+ 

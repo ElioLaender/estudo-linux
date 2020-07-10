@@ -1,0 +1,203 @@
+Comparando parâmetros com regex:
+
+
+
+===========================================
+filtrando-resultado-apache.sh
+
+#!/bin/bash
+
+cd ~/apache-log
+
+regex="\b([0-9]{1,3}\.){3}[0-9]{1,3}\b"
+
+# Verificando se o parâmetro se enquadra com a expressão regular
+if [[ $1 =~ $regex ]] # adicionado '[]' para notificar que será realizado a verificação com regex
+then
+   cat apache.log | grep $1
+   if [ $? -ne 0]
+   then
+	echo "O endereço IP procurado não está presente no arquivo".
+   fi
+else
+   echo "Formato não é válido"
+fi
+
+cat apache.log | grep $1
+
+==============================================
+
+#!/bin/bash
+
+cd ~/apache-log
+
+if [ $1 == "GET" ]
+then
+   cat apache.log | grep GET
+elif [ $1 == "POST" ]
+then
+   cat apache.log | grep POST
+elif [ $1 == "PUT" ]
+then
+   cat apache.log | grep PUT
+elif [ $1 == "DELETE" ]
+then
+   cat apache.log | grep DELETE
+fi
+
+============================================
+Switch Case no Bash:
+
+#!/bin/bash
+
+cd ~/apache-log
+
+if [ -z $1 ] # Verifica se o parâmetro informado é vazio.  
+then
+   while [ -z $requisicao ] # enquanto a variável $requisição estiver vazia, o laço será repetido. 
+   do
+   	read -p "Você esqueceu de colocar o parametro (GET, PUT, POST, DELETE): " requisicao #pegando a posição fornecida pelo usuário.
+   	letra_maiuscula=$(echo $requisicao | awk '{ print toupper($requisicao)}') # convertendo o texto passado pelo usuário em caixa alta. 
+   done
+else
+   letra_maiuscula=$(echo $1 | awk '{ print toupper($1)}') # Convertendo o parâmetro para maiúsculo com a função awk
+fi
+
+case letra_maiuscula in 
+	GET)
+	cat apache.log | grep GET
+	;;
+	POST)
+	cat apache.log | grep POST
+	;;
+	PUT)
+	cat apache.log | grep PUT
+	;;
+	DELETE)
+	cat apache.log | grep DELETE
+	;;
+	*)
+	echo "O parâmetro passado não é válido.";
+	;;
+esac # O fechamanto é o nome ao contrário. 
+
+
+==============================================
+
+Comparação com "-eq":
+
+if [ $1 -eq "TESTE" ]
+then
+    echo true
+else
+    echo false
+fi
+
+Nós teremos a impressão de uma mensagem de erro, isso porque o if está utilizando a expressão de comparação -eq, tal expressão é utilizada para comparar valores inteiros e não strings.
+
+A expressão -eq é utilizada para comparar valores inteiros e não strings, dessa forma nós teremos uma mensagem de erro alertando sobre tal fato. Para compararmos string poderíamos usar a expressão == ou =
+
+===============================================
+
+Comparação com "-z":
+
+if [ -z $1 ]
+then
+    echo true
+else
+    echo false
+fi
+
+Veja que aqui nós estamos a opção -z que seria referência a zero, isso quer dizer que o parâmetro passado tem que ter 0 caracteres, ou seja, tem que ser vazio. Dessa forma, nós teremos a impressão da mensagem true.
+
+================================================
+
+
+Verificando Status HTTP:
+
+Para executar o exercício, é necessário instalar o apache:
+
+apt-get install apache2
+
+A pasta padrão para acesso dos arquivos servidos pelo apache fica em:
+
+/var/www/html/index.html
+
+Iniciando servidor apache:
+
+sudo service apache2 start
+
+* Após ter o apache2 com o arquivo do site e devidamente startado, vamos baixar o curl para realizar chamadas no site e verificar qual o retorno vamos obter, sendo esta uma forma de monitorar se o sistema está funcionando normalmente. 
+
+- verificando se temos o curl instalado: curl --version
+- Instalando o curl: apt-get install curl
+
+* Realizando chamada na url com o curl:
+
+- curl http://localhost # O curl retorna todo o html retornado pela url buscada. 
+
+* Chamada na página com o curl desconsiderando a estrutura html retornada
+curl --write-out %{http_code} --silent --output /dev/null http://localhost
+
+# dev/null -> descartando toda saída. 
+# --write-out %{http_code} -> Escreve o código http na saída
+# --silent -> Desconsidera qualquer outra informação não requerida explicitamete
+
+===================================================================================
+Script para monitorar o servidor:
+
+# monitoracao-servidor.sh
+
+#!/bin/bash
+
+resposta_http=$(curl --write-out %{http_code} --silent --output /dev/null http://localhost)
+
+if [ $resposta_http -eq 200 ]
+then
+      echo "Tudo está ok com o servidor"
+else 
+      echo "Houve um problema no servidor. Tentando reinicializar"
+      systemctl restart apache2
+      echo "...Servidor reinicializado"
+fi
+
+
+====================================================================================
+
+Arquivo null:
+
+cat testando.txt 2> /dev/null
+
+O null seria um arquivo especial que tem como objetivo descartar toda a informação de entrada.
+
+O arquivo null seria um arquivo especial do sistema que tem como objetivo descartar as informações que são repassadas a ele. No exercício, estamos descartando as mensagens de erro do comando cat(Veja o descritor de arquivo, número 2)
+
+====================================================================================
+
+
+Agendando tarefas com o crontab:
+
+O crontab é um arquivo utilizado para agendamento de tarefas de comandos, com o objetivo de que sejam executados em um determinado intervalo de tempo.
+
+Para executar o arquivo é necessário adicionar permissão para o mesmo no sistem:
+
+chmod +x monitoracao-servidor.sh
+
+Acessando arquivo de configuração do contab:
+
+sudo contrab -e # Necessário o sudo para editarmos o arquivo, pois o mesmo é global e requer permissão de usuário root.
+
+Exemplo de configuração no crontab para executar o arquivo de 2 em dois minutos:
+
+*/2 **** /home/elio/Scripts/monitoracao-servidor.sh # endereço do arquivo que deverá ser executado.  
+
+
+
+
+
+
+
+
+
+
+
