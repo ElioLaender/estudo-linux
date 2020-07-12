@@ -9,7 +9,7 @@ then
 fi
 
 mysqldump -u root $1 > $CAMINHO_HOME/backup/$1.sql
-if [ $? -eq 0] # $? captura status de saída do comando acima e verifica se é diferente de 0
+if [ $? -eq 0] # $? captura status de saÃ­da do comando acima e verifica se Ã© diferente de 0
 then
   echo "Backup foi realizado com sucesso"
 else 
@@ -20,24 +20,24 @@ fi
 
 sudo mysql -u root mutillidae < ~/backup/mutillidae.sql
 
-Com esse comando, estamos pegando o conteúdo do arquivo mutillidae.sql e o estamos restabelecendo no banco mutillidae presente no MySQL, exatamente como foi especificado na resposta
+Com esse comando, estamos pegando o conteÃºdo do arquivo mutillidae.sql e o estamos restabelecendo no banco mutillidae presente no MySQL, exatamente como foi especificado na resposta
 
 ====================================================================
 
 Enviando backup para bucket na Amazon: (resumo)
 
-Pacotes necessários:
+Pacotes necessÃ¡rios:
 $ sudo apt install python-pip -y
 $ pip install awscli
 $ sudo apt install awscli
 
-configurações:
+configuraÃ§Ãµes:
 
 aws configure
-AWS Access Key ID [None]: AKIAITAYKPQTNDARDENQ
-AWS Secret Access Key [None]: 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
+AWS Access Key ID [None]: 
+AWS Secret Access Key [None]:
 Default region name [None]: sa-east-1
 Default output format [None]: [Apenas pressione ENTER no teclado]
 
-Com esses pacotes instalados e a conta na amazon criada e o S3 configurado, será possível comunicar com o buket para enviar os backups
+Com esses pacotes instalados e a conta na amazon criada e o S3 configurado, serÃ¡ possÃ­vel comunicar com o buket para enviar os backups
 
